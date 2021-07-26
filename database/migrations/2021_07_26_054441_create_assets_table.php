@@ -15,6 +15,12 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->string('asset_name');
+            $table->string('price');
+            $table->string('initial_quantity');
+            $table->string('person')->nullable();
+            $table->string('quantity_givenout')->nullable();
+            $table->foreignId('created_by');
             $table->timestamps();
         });
     }

@@ -15,6 +15,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('item');
+            $table->string('quantity');
+            $table->string('amount');
+            $table->string('deposit');
+            $table->string('balance')->nullable();
+            $table->string('company');
+            $table->string('end_date');
+            $table->string('email');
+            $table->string('phone');
+            $table->foreignId('created_by');
+            $table->enum('status',['active','done','lost'])->default('active');
             $table->timestamps();
         });
     }

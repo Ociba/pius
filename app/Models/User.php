@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use DB;
 
 class User extends Authenticatable
 {
@@ -58,4 +59,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    public function remainingQuantity(){
+        $initial_quantity =$this->getInitialQuantity($id) -$this->getGivenQuantity($id);
+        return  $initial_quantity;
+    }
+
+    private function getInitialQuantity($id){
+        return DB::table('assets')->where('id',$id)->value('initial_quantity');
+    }
+    private function getGivenQuantity($id){
+        return DB::table('assets')->where('id',$id)->value('quantity_givenout');
+    }
 }

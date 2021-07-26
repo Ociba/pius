@@ -38,7 +38,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         @include('layouts.breadcrumb')
-
+                        @include('layouts.message')
                         <div class="row">
                              <!-- customar project  start -->
                              <div class="col-xl-12">
@@ -63,66 +63,20 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($get_department as $i=>$department)
                                                     <tr>
                                                         <td>
-                                                            <img src="assets/img/ticket/p1.jpg">
+                                                           {{$i + 1}}
                                                         </td>
-                                                        <td>Anesthetics</td>
-                                                        <td>There are many variations of passages of Lorem Ipsum ...</td>
+                                                        <td>{{$department->name}}</td>
+                                                        <td>{{$department->description}}</td>
                                                         <td>
-                                                            <a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>
+                                                            {{--<a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>--}}
                                                             <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
                                                             <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/ticket/p3.jpg">
-                                                        </td>
-                                                        <td>Cardiology</td>
-                                                        <td>There are many variations of passages of Lorem Ipsum ...</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/ticket/p2.jpg">
-                                                        </td>
-                                                        <td>Gastroenterology</td>
-                                                        <td>There are many variations of passages of Lorem Ipsum ...</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/ticket/p4.jpg">
-                                                        </td>
-                                                        <td>Anesthetics</td>
-                                                        <td>There are many variations of passages of Lorem Ipsum ...</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/ticket/p5.jpg">
-                                                        </td>
-                                                        <td>Gastroenterology</td>
-                                                        <td>There are many variations of passages of Lorem Ipsum ...</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-primary btn-sm"><i class="feather icon-plus"></i>Manage Facilities</a>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -170,27 +124,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="/create-department" method="get">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label class="floating-label" for="Name">Name</label>
-                                <input type="text" class="form-control" id="Name" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group fill">
-                                <label class="floating-label" for="Icon">Icon</label>
-                                <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                                <label class="floating-label" for="Name">Department</label>
+                                <input type="text" class="form-control" id="Name" name="name" placeholder="">
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label class="floating-label" for="Description">Description</label>
-                                <textarea class="form-control" id="Description" rows="3"></textarea>
+                                <textarea class="form-control" id="Description" name="description" rows="3"></textarea>
                             </div>
-                            <button class="btn btn-primary">Submit</button>
-                            <button class="btn btn-danger">Clear</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </form>

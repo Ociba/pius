@@ -36,11 +36,19 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/logout',[AuthenticationController::Class, 'logoutUser']);
 Route::get('/get-department',[DepartmentController::Class,'getDepartment'])->name('Department');
+Route::get('/create-department',[DepartmentController::Class,'validateDepartment']);
 Route::get('/get-employee',[EmployeeController::Class, 'getEmployee'])->name('Employee');
+Route::post('/create-employee',[EmployeeController::Class,'validateEmployee']);
 Route::get('/get-asset',[AssetController::Class, 'getAsset'])->name('Asset');
+Route::get('/create-asset',[AssetController::class,'validateAsset']);
+Route::get('/given-out/{id}',[AssetController::class,'updateItemQuantity']);
+Route::get('/distribute_asset/{id}',[AssetController::class,'giveOutAsset']);
 Route::get('/get-store',[StoreController::Class, 'getStore'])->name('Store');
 Route::get('/get-pricing',[PriceController::Class, 'getPrice'])->name('Price');
 Route::get('/get-transaction',[TransactionController::Class, 'getTransaction'])->name('Transaction');
+Route::get('/create-transaction',[TransactionController::Class,'validateTransaction']);
+Route::get('/print-transaction/{id}',[TransactionController::Class, 'printTransaction'])->name('Print Transaction');
+Route::get('/print-copy-now/{id}',[TransactionController::Class,'printTransactionCopy']);
 Route::get('/get-withdraw',[WithdrawController::Class, 'getWithdraw'])->name('Withdraw');
 Route::get('/get-expenditure',[ExpenditureController::Class, 'getExpenditure'])->name('Expenditure');
 Route::get('/get-receipt',[ReceiptController::Class, 'getReceipt'])->name('Receipts');

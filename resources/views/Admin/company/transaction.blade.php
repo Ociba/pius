@@ -38,7 +38,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         @include('layouts.breadcrumb')
-
+                         @include('layouts.message')
                         <div class="row">
                              <!-- customar project  start -->
                             <div class="col-xl-12">
@@ -55,67 +55,41 @@
                                             <table id="report-table" class="table table-bordered table-striped mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Image</th>
-                                                        <th>Name</th>
+                                                        <th>No.</th>
+                                                        <th>Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Amount</th>
+                                                        <th>Deposit</th>
+                                                        <th>Balance</th>
+                                                        <th>Company</th>
+                                                        <th>Received On</th>
+                                                        <th>Dedline</th>
                                                         <th>Email</th>
-                                                        <th>Address</th>
                                                         <th>Phone</th>
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
+                                                        @foreach($get_transction as $i =>$transaction)
+                                                        <td>{{$i + 1}}</td>
+                                                        <td>{{$transaction->item}}</td>
+                                                        <td>{{$transaction->quantity}}</td>
+                                                        <td>{{$transaction->amount}}</td>
+                                                        <td>{{$transaction->deposit}}</td>
+                                                        <td>{{$transaction->balance}}</td>
+                                                        <td>{{$transaction->company}}</td>
+                                                        <td>{{$transaction->created_at}}</td>
+                                                        <td>{{$transaction->end_date}}</td>
+                                                        <td>{{$transaction->email}}</td>
+                                                        <td>{{$transaction->phone}}</td>
                                                         <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                                            <a href="/edit-transaction/{{$transaction->id}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                                            <a href="/print-transaction/{{$transaction->id}}" class="btn btn-info btn-sm"><i class="feather icon-print"></i>&nbsp;Print </a>
+                                                            <a href="/delete-transaction/{{$transaction->id}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -163,45 +137,64 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/create-transaction" method="get">
+                    @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Name">Name</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="">
+                                    <label class="floating-label" for="Name">Item</label>
+                                    <input type="text" class="form-control" name="item" id="Name" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group fill">
-                                    <label class="floating-label" for="Email">Email</label>
-                                    <input type="email" class="form-control" id="Email" placeholder="">
+                                    <label class="floating-label" for="Email">Quantity</label>
+                                    <input type="text" class="form-control" name="quantity" id="Email" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group fill">
-                                    <label class="floating-label" for="Password">Password</label>
-                                    <input type="password" class="form-control" id="Password" placeholder="">
+                                    <label class="floating-label" for="Password">Amount</label>
+                                    <input type="text" class="form-control" name="amount" id="Password" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Phone">Phone</label>
-                                    <input type="text" class="form-control" id="Phone" placeholder="">
+                                    <label class="floating-label" for="Phone">Deposit</label>
+                                    <input type="text" class="form-control" name="deposit" id="eposit" placeholder="">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Address">Address</label>
-                                    <textarea class="form-control" id="Address" rows="3"></textarea>
+                                    <label class="floating-label" for="Address">Balance</label>
+                                    <input type="text" name="balance" class="form-control" id="Address">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Icon">Company</label>
+                                    <input type="text" class="form-control" name="company" id="Icon" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Icon">Email</label>
+                                    <input type="text" class="form-control" name="email" id="Icon" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Icon">Phone Contact</label>
+                                    <input type="text" class="form-control" name="phone" id="Icon" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Profie Image</label>
-                                    <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                                    <label class="floating-label" for="Icon">Deadline</label>
+                                    <input type="date" class="form-control" name="end_date" id="Icon" placeholder="">
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 text-center">
                                 <button class="btn btn-primary">Submit</button>
                                 <button class="btn btn-danger">Clear</button>
                             </div>

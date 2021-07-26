@@ -38,8 +38,8 @@
                     <li class="sidenav-item"><a href="/get-department" class="sidenav-link"><div>Department</div></a></li>
                     <li class="sidenav-item"><a href="/get-employee" class="sidenav-link"><div>Employees</div></a></li>
                     <li class="sidenav-item"><a href="/get-asset" class="sidenav-link"><div>Asset</div></a></li>
-                    <li class="sidenav-item"><a href="/get-store" class="sidenav-link"><div>Store</div></a></li>
-                    <li class="sidenav-item"><a href="/get-pricing" class="sidenav-link"><div>Pricing</div></a></li>
+                    {{--<li class="sidenav-item"><a href="/get-store" class="sidenav-link"><div>Store</div></a></li>--}}
+                    {{--<li class="sidenav-item"><a href="/get-pricing" class="sidenav-link"><div>Pricing</div></a></li>--}}
                 </ul>
             </li>
             

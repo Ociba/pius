@@ -38,7 +38,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         @include('layouts.breadcrumb')
-
+                        @include('layouts.message')
                         <div class="row">
                              <!-- customar project  start -->
                             <div class="col-xl-12">
@@ -55,67 +55,33 @@
                                             <table id="report-table" class="table table-bordered table-striped mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Image</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Address</th>
-                                                        <th>Phone</th>
+                                                        <th>No.</th>
+                                                        <th>Price</th>
+                                                        <th>Initial Quantity</th>
+                                                        <th>Given Out</th>
+                                                        <th>Remaining Quantity</th>
+                                                        <th>Responsible Person</th>
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($get_asset as $i =>$asset)
                                                     <tr>
                                                         <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+                                                            {{$i + 1}}
                                                         </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
+                                                        <td>{{$asset->price}}</td>
+                                                        <td>{{$asset->initial_quantity}}</td>
+                                                        <td>{{$asset->quantity_givenout}}</td>
+                                                        <td>{{$asset->initial_quantity-$asset->quantity_givenout}}</td>
+                                                        <td>{{$asset->person}}</td>
                                                         <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                                            <a href="/edit-asset/{{$asset->id}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                                            <a href="/distribute_asset/{{$asset->id}}" class="btn btn-primary btn-sm"><i class="feather icon-edit"></i>&nbsp;Giveout </a>
+                                                            <a href="/delete-asset/{{$asset->id}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -163,46 +129,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/create-asset" method="get">
+                    @csrf
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Name">Name</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="">
+                            <div class="col-sm-12">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Email">Asset Name</label>
+                                    <input type="text" class="form-control" name="asset_name" id="Email" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group fill">
-                                    <label class="floating-label" for="Email">Email</label>
-                                    <input type="email" class="form-control" id="Email" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Password">Password</label>
-                                    <input type="password" class="form-control" id="Password" placeholder="">
+                                    <label class="floating-label" for="Password">Price</label>
+                                    <input type="text" class="form-control" name="price" id="Password" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Phone">Phone</label>
-                                    <input type="text" class="form-control" id="Phone" placeholder="">
+                                    <label class="floating-label" for="Phone">Initial Quantity</label>
+                                    <input type="text" class="form-control" name="initial_quantity" id="Phone" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Address">Address</label>
-                                    <textarea class="form-control" id="Address" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Profie Image</label>
-                                    <input type="file" class="form-control" id="Icon" placeholder="sdf">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <button class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                                 <button class="btn btn-danger">Clear</button>
                             </div>
                         </div>
