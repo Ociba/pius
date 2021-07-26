@@ -1,0 +1,1 @@
+<title>Tech | {{ request()->route()->getName() }} </title>
