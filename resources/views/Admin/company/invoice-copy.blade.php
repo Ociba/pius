@@ -32,17 +32,9 @@
             color: #000 !important;
         }
     </style>
-   <link rel="stylesheet" href="{{ asset('assets/libs/datatables/datatables.css')}}">
 </head>
 
-<body>
-
-    <!-- [ Layout wrapper ] Start -->
-    <div class="layout-wrapper layout-2">
-        <div class="layout-inner">
-
-                <!-- [ Layout content ] Start -->
-                <div class="layout-content">
+<body >
 
                     <!-- [ content ] Start -->
                     <div class="invoice-print p-5">
@@ -162,10 +154,6 @@
                                 <div class="text-muted">
                                     <strong>Note:</strong> This document is invalid without original Official Stamp from right person for this company.
                                 </div>
-                            </div>
-                            <div class="card-footer text-right">
-                                <a href="pages_invoice-print.html" target="_blank" class="btn btn-default"><i class="ion ion-md-print"></i>&nbsp; Print</a>
-                                <button type="button" class="btn btn-primary ml-2"><i class="ion ion-ios-paper-plane"></i>&nbsp; Send</button>
                             </div>
                             @endforeach
                                     </div>

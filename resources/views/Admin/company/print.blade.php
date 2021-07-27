@@ -8,11 +8,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Empire is one of the unique admin template built on top of Bootstrap 4 framework. It is easy to customize, flexible code styles, well tested, modern & responsive are the topmost key factors of Empire Dashboard Template" />
+    <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Codedthemes" />
    @include('layouts.css')
-   <link rel="stylesheet" href="{{ asset('assets/libs/datatables/datatables.css')}}">
 </head>
 
 <body>
@@ -187,12 +186,6 @@
 
     <!-- Core scripts -->
     @include('layouts.javascript')
-    <script src="{{ asset('assets/libs/datatables/datatables.js')}}"></script>
-    <script>
-        // DataTable start
-        $('#report-table').DataTable();
-        // DataTable end
-    </script>
 </body>
 </html>
 
