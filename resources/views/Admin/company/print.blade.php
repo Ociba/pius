@@ -59,7 +59,7 @@
                                         <div>+0 (123) 456 7891, +9 (876) 543 2198</div>
                                     </div>
                                     <div class="col-sm-6 text-right pb-4">
-                                        <h6 class="text-big text-large font-weight-bold mb-3">INVOICE #49029</h6>
+                                        <h6 class="text-big text-large font-weight-bold mb-3">No. <span style="color:red;"> {{$transaction->receipt_number}}</span></h6>
                                         <div class="mb-1">Date:
                                             <strong class="font-weight-semibold">{{ date('d M, Y', strtotime($transaction->created_at))}}</strong>
                                         </div>
@@ -84,16 +84,16 @@
                                                 <tr>
                                                     <td class="pr-3">Total Due:</td>
                                                     <td>
-                                                        <strong>sh. {{$transaction->amount}}</strong>
+                                                        <strong>sh. {{ number_format($transaction->amount)}}</strong>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-3">Deposited:</td>
-                                                    <td>{{$transaction->deposit}}</td>
+                                                    <td>sh. {{ number_format($transaction->deposit)}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="pr-3">Balance:</td>
-                                                    <td>{{$transaction->balance}}</td>
+                                                    <td>sh. {{ number_format($transaction->balance)}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -129,7 +129,7 @@
                                                     <strong>{{$transaction->created_at}}</strong>
                                                 </td>
                                                 <td class="py-3">
-                                                    <strong>sh. {{$transaction->amount}}</strong>
+                                                    <strong>sh. {{ number_format($transaction->amount)}}</strong>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -140,11 +140,11 @@
                                                     <span class="d-block text-big mt-2">Total:</span>
                                                 </td>
                                                 <td class="py-3">
-                                                    <strong>{{$transaction->amount}}</strong>
+                                                    <strong>sh. {{ number_format($transaction->amount)}}</strong>
                                                     <br>
                                                     <strong>0</strong>
                                                     <br>
-                                                    <strong class="d-block text-big mt-2">{{$transaction->amount}}</strong>
+                                                    <strong class="d-block text-big mt-2">sh. {{ number_format($transaction->amount)}}</strong>
                                                 </td>
                                             </tr>
                                         </tbody>

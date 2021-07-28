@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Expenditure extends Model
 {
     use HasFactory;
+    protected $fillable=['item','price','responsible_person','created_by'];
 }

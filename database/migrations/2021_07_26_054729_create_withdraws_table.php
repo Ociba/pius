@@ -15,6 +15,8 @@ class CreateWithdrawsTable extends Migration
     {
         Schema::create('withdraws', function (Blueprint $table) {
             $table->id();
+            $table->string('amount');
+            $table->foreignId('created_by');
             $table->timestamps();
         });
     }

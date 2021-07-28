@@ -8,12 +8,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Empire is one of the unique admin template built on top of Bootstrap 4 framework. It is easy to customize, flexible code styles, well tested, modern & responsive are the topmost key factors of Empire Dashboard Template" />
+    <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Codedthemes" />
    @include('layouts.css')
-   <link rel="stylesheet" href="{{ asset('assets/libs/datatables/datatables.css')}}">
    <link rel="stylesheet" href="{{ asset('assets/css/pages/file-manager.css')}}">
+   <link rel="stylesheet" href="{{ asset('assets/libs/blueimp-gallery/gallery.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/libs/blueimp-gallery/gallery-indicator.css')}}">
 </head>
 
 <body>
@@ -39,7 +40,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         @include('layouts.breadcrumb')
-
+                        @include('layouts.message')
                         <div class="row">
                              <!-- customar project  start -->
                             <div class="col-xl-12">
@@ -54,12 +55,9 @@
 
                                         <div class="file-manager-actions container-p-x py-2">
                                             <div>
-                                                <button type="button" class="btn btn-primary mr-2">
+                                                <button data-toggle="modal" data-target="#modal-report" class="btn btn-primary mr-2">
                                                     <i class="ion ion-md-cloud-upload"></i>&nbsp; Upload</button>
-                                                <button type="button" class="btn btn-secondary mr-2" disabled>
-                                                    <i class="ion ion-md-cloud-download"></i>
-                                                </button>
-                                                <div class="btn-group mr-2">
+                                                    <div class="btn-group mr-2">
                                                     <button type="button" class="btn btn-default md-btn-flat dropdown-toggle px-2" data-toggle="dropdown">
                                                         <i class="ion ion-ios-settings"></i>
                                                     </button>
@@ -86,431 +84,37 @@
 
                                         <hr class="m-0">
                                     </div>
-
+                                   
                                     <div class="file-manager-container file-manager-col-view">
 
                                         <div class="file-manager-row-header">
                                             <div class="file-item-name pb-2">Filename</div>
                                             <div class="file-item-changed pb-2">Changed</div>
                                         </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-icon file-item-level-up fas fa-level-up-alt text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                ..
-                                            </a>
-                                        </div>
-
+                                        @foreach($get_receipt as $receipt)
                                         <div class="file-item">
                                             <div class="file-item-select-bg bg-primary"></div>
                                             <label class="file-item-checkbox custom-control custom-checkbox">
                                                 <input type="checkbox" class="custom-control-input">
                                                 <span class="custom-control-label"></span>
                                             </label>
-                                            <div class="file-item-icon far fa-folder text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Images
+                                            <div  class="file-item-img" ><a href="{{ asset('receipts/images/'.$receipt->file)}}" class="img-thumbnail img-thumbnail-zoom-in"><img src="{{ asset('receipts/images/'.$receipt->file)}}" class="img-fluid img-radiu wid-30" alt=""></div>
+                                            <a href="#" class="file-item-name">
+                                                {{$receipt ->title}}
                                             </a>
-                                            <div class="file-item-changed">02/13/2018</div>
+                                            <div class="file-item-changed">{{$receipt->created_at}}</div>
                                             <div class="file-item-actions btn-group">
                                                 <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
                                                     <i class="ion ion-ios-more"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
+                                                    <a class="dropdown-item" href="/rename-receipt/{{$receipt->id}}">Rename</a>
+                                                    <a class="dropdown-item" href="/remove-receipt/{{$receipt->id}}">Remove</a>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-folder text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Scripts
-                                            </a>
-                                            <div class="file-item-changed">02/14/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-folder text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                assets
-                                            </a>
-                                            <div class="file-item-changed">02/15/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-archive text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Archive.zip
-                                            </a>
-                                            <div class="file-item-changed">02/16/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon fab fa-js text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Build.js
-                                            </a>
-                                            <div class="file-item-changed">02/17/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-word text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Checklist.doc
-                                            </a>
-                                            <div class="file-item-changed">02/18/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon fab fa-html5 text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Index.html
-                                            </a>
-                                            <div class="file-item-changed">02/19/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-img" style="background-image: url(assets/img/bg/5.jpg)"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Image-1.jpg
-                                            </a>
-                                            <div class="file-item-changed">02/20/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-img" style="background-image: url(assets/img/bg/6.jpg)"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Image-2.png
-                                            </a>
-                                            <div class="file-item-changed">02/21/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-img" style="background-image: url(assets/img/bg/7.jpg)"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Image-3.gif
-                                            </a>
-                                            <div class="file-item-changed">02/22/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon fab fa-js text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Main.js
-                                            </a>
-                                            <div class="file-item-changed">02/23/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                MAKEFILE
-                                            </a>
-                                            <div class="file-item-changed">02/24/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-pdf text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Presentation.pdf
-                                            </a>
-                                            <div class="file-item-changed">02/25/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-alt text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                README.txt
-                                            </a>
-                                            <div class="file-item-changed">02/26/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon fab fa-css3 text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Style.css
-                                            </a>
-                                            <div class="file-item-changed">02/27/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-audio text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Test.mp3
-                                            </a>
-                                            <div class="file-item-changed">02/28/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="file-item">
-                                            <div class="file-item-select-bg bg-primary"></div>
-                                            <label class="file-item-checkbox custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input">
-                                                <span class="custom-control-label"></span>
-                                            </label>
-                                            <div class="file-item-icon far fa-file-video text-secondary"></div>
-                                            <a href="javascript:void(0)" class="file-item-name">
-                                                Tutorial.avi
-                                            </a>
-                                            <div class="file-item-changed">03/01/2018</div>
-                                            <div class="file-item-actions btn-group">
-                                                <button type="button" class="btn btn-default btn-sm btn-round icon-btn borderless md-btn-flat hide-arrow dropdown-toggle" data-toggle="dropdown">
-                                                    <i class="ion ion-ios-more"></i>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="javascript:void(0)">Rename</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                                                    <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                      @endforeach
                                     </div>
-
                                 </div>
                                 <!-- / Content -->
                                     </div>
@@ -540,6 +144,13 @@
     <!-- Core scripts -->
     @include('layouts.javascript')
     <script src="{{ asset('assets/js/analytics.js')}}"></script>
+    <script src="{{ asset('assets/libs/blueimp-gallery/gallery.js')}}"></script>
+    <script src="{{ asset('assets/libs/blueimp-gallery/gallery-fullscreen.js')}}"></script>
+    <script src="{{ asset('assets/libs/blueimp-gallery/gallery-indicator.js')}}"></script>
+    <script src="{{ asset('assets/libs/masonry/masonry.js')}}"></script>
+
+    <!-- Demo -->
+    <script src="{{ asset('assets/js/pages/pages_gallery.js')}}"></script>
     <script>
         $(function() {
 
@@ -584,4 +195,38 @@
     </script>
 </body>
 </html>
+<div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Receipt</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="/create-receipt" method="post" enctype ="multipart/form-data">
+                    @csrf
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="floating-label" for="Name">Title</label>
+                                    <input type="text" class="form-control" name="title" id="Name" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Email">Receipt</label>
+                                    <input type="file" class="form-control" name="file" id="Email" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <button type ="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 

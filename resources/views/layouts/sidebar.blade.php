@@ -50,6 +50,8 @@
                 </a>
                 <ul class="sidenav-menu">
                     <li class="sidenav-item"><a href="/get-transaction" class="sidenav-link"><div>Transactions</div></a></li>
+                    <li class="sidenav-item"><a href="/get-done-transaction" class="sidenav-link"><div>Done Transactions</div></a></li>
+                    <li class="sidenav-item"><a href="/get-lost-transaction" class="sidenav-link"><div>Lost Transactions</div></a></li>
                     <li class="sidenav-item"><a href="/get-withdraw" class="sidenav-link"><div>Withdraw</div></a></li>
                     <li class="sidenav-item"><a href="/get-expenditure" class="sidenav-link"><div>Expenditure</div></a></li>
                     <li class="sidenav-item"><a href="/get-receipt" class="sidenav-link"><div>Receipts</div></a></li>

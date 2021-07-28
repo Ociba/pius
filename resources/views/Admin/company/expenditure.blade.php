@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <meta name="description" content="Empire is one of the unique admin template built on top of Bootstrap 4 framework. It is easy to customize, flexible code styles, well tested, modern & responsive are the topmost key factors of Empire Dashboard Template" />
+    <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Codedthemes" />
    @include('layouts.css')
@@ -38,7 +38,7 @@
                     <!-- [ content ] Start -->
                     <div class="container-fluid flex-grow-1 container-p-y">
                         @include('layouts.breadcrumb')
-
+                        @include('layouts.message')
                         <div class="row">
                              <!-- customar project  start -->
                             <div class="col-xl-12">
@@ -55,67 +55,34 @@
                                             <table id="report-table" class="table table-bordered table-striped mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th>Image</th>
-                                                        <th>Name</th>
-                                                        <th>Email</th>
-                                                        <th>Address</th>
-                                                        <th>Phone</th>
+                                                        <th>No.</th>
+                                                        <th>Item</th>
+                                                        <th>Quantity</th>
+                                                        <th>Price</th>
+                                                        <th>Amount</th>
+                                                        <th>Responsible Person</th>
+                                                        <th>Date</th>
                                                         <th>Options</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($get_expenditure as $i =>$expenditure)
                                                     <tr>
+                                                    <td>{{$i + 1}}
                                                         <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
+                                                            {{$expenditure->item}}
                                                         </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
+                                                        <td>{{$expenditure->quantity}}</td>
+                                                        <td>{{ number_format($expenditure->price)}}</td>
+                                                        <td>{{number_format($expenditure->quantity * $expenditure->price)}}</td>
+                                                        <td>{{$expenditure->responsible_person}}</td>
+                                                        <td>{{$expenditure->created_at}}</td>
                                                         <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
+                                                            <a href="/edit-expenses/{{$expenditure->id}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
+                                                            <a href="/delete-expense/{{$expenditure->id}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-1.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Micheal Pewd</td>
-                                                        <td>nurse@example.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+984-46-9388638</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <img src="assets/img/user/avatar-3.jpg" class="img-fluid img-radius wid-40" alt="">
-                                                        </td>
-                                                        <td>Erich Mcbride</td>
-                                                        <td>xidim@gmail.com</td>
-                                                        <td>Some address</td>
-                                                        <td>+612-92-1385682</td>
-                                                        <td>
-                                                            <a href="#!" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="#!" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Delete </a>
-                                                        </td>
-                                                    </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -163,47 +130,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/create-expenditure" method="get">
+                    @csrf
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Name">Name</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Email">Email</label>
-                                    <input type="email" class="form-control" id="Email" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Password">Password</label>
-                                    <input type="password" class="form-control" id="Password" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Phone">Phone</label>
-                                    <input type="text" class="form-control" id="Phone" placeholder="">
-                                </div>
-                            </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label class="floating-label" for="Address">Address</label>
-                                    <textarea class="form-control" id="Address" rows="3"></textarea>
+                                    <label class="floating-label" for="Name">Item</label>
+                                    <input type="text" class="form-control" name="item" id="Name" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Profie Image</label>
-                                    <input type="file" class="form-control" id="Icon" placeholder="sdf">
+                                    <label class="floating-label" for="Email">Quantity</label>
+                                    <input type="text" class="form-control" name="quantity" id="Email" placeholder="">
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <button class="btn btn-primary">Submit</button>
-                                <button class="btn btn-danger">Clear</button>
+                                <div class="form-group fill">
+                                    <label class="floating-label" for="Email">Price</label>
+                                    <input type="text" class="form-control" name="price" id="Email" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="floating-label" for="Name">Responsible Person</label>
+                                    <input type="text" class="form-control" name="responsible_person" id="Name" placeholder="">
+                                </div>
+                            </div>
+                           <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -48,7 +48,6 @@
                                             <div class="col-sm-6">
                                             </div>
                                             <div class="col-sm-6 text-right">
-                                                <button class="btn btn-success btn-sm mb-3 btn-round" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Add Transaction</button>
                                             </div>
                                         </div>
                                         <div class="table-responsive">
@@ -67,12 +66,11 @@
                                                         <th>Dedline</th>
                                                         <th>Email</th>
                                                         <th>Phone</th>
-                                                        <th>Options</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        @foreach($get_transction as $i =>$transaction)
+                                                        @foreach($get_lost_transction as $i =>$transaction)
                                                         <td>{{$i + 1}}</td>
                                                         <td class="text-danger">{{$transaction->receipt_number}}
                                                         <td>{{$transaction->item}}</td>
@@ -85,12 +83,6 @@
                                                         <td>{{$transaction->end_date}}</td>
                                                         <td>{{$transaction->email}}</td>
                                                         <td>{{$transaction->phone}}</td>
-                                                        <td>
-                                                            <a href="/edit-transaction/{{$transaction->id}}" class="btn btn-info btn-sm"><i class="feather icon-edit"></i>&nbsp;Edit </a>
-                                                            <a href="/print-transaction/{{$transaction->id}}" class="btn btn-success btn-sm"><i class="feather icon-print"></i>&nbsp;Print </a>
-                                                            <a href="/done/{{$transaction->id}}" class="btn btn-danger btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Done</a>
-                                                            <a href="/lost/{{$transaction->id}}" class="btn btn-warning btn-sm"><i class="feather icon-trash-2"></i>&nbsp;Lost</a>
-                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -130,81 +122,4 @@
     </script>
 </body>
 </html>
-<div class="modal fade" id="modal-report" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add Transaction</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="/create-transaction" method="get">
-                    @csrf
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Name">Item</label>
-                                    <input type="text" class="form-control" name="item" id="Name" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Email">Quantity</label>
-                                    <input type="text" class="form-control" name="quantity" id="Email" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Password">Amount</label>
-                                    <input type="text" class="form-control" name="amount" id="Password" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Phone">Deposit</label>
-                                    <input type="text" class="form-control" name="deposit" id="eposit" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label class="floating-label" for="Address">Balance</label>
-                                    <input type="text" name="balance" class="form-control" id="Address">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Company</label>
-                                    <input type="text" class="form-control" name="company" id="Icon" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Email</label>
-                                    <input type="text" class="form-control" name="email" id="Icon" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Phone Contact</label>
-                                    <input type="text" class="form-control" name="phone" id="Icon" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group fill">
-                                    <label class="floating-label" for="Icon">Deadline</label>
-                                    <input type="date" class="form-control" name="end_date" id="Icon" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-sm-12 text-center">
-                                <button class="btn btn-primary">Submit</button>
-                                <button class="btn btn-danger">Clear</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
